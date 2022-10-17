@@ -2517,6 +2517,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/nsfw/hentaivid', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+  const hentaivid = JSON.parse(fs.readFileSync(__path +'/data/hentaivid.json'));
+  const randhentaivid = hentaivid[Math.floor(Math.random() * hentaivid.length)];
+  data = await fetch(randahegao).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/hentaivid.mp4', data)
+  res.sendFile(__path +'/tmp/hentaivid.mp4')
+} else {
+res.json(loghandler.invalidKey)
+}
+})
+
 router.get('/nsfw/gifs', async (req, res, next) => {
         var Apikey = req.query.apikey
             
